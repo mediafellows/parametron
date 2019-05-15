@@ -1,0 +1,21 @@
+{
+  "name": "parametron",
+  "version": "0.0.1",
+  "description": "parametrize search queries",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "johannes-kostas goetzinger <goetzinger@mediapeers.com>",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.4",
+    "lodash": "^4.17.11",
+    "chinchilla": "https://github.com/mediapeers/chinchilla.git#19828843fff3974c4a39449b725846e9bd704ca6"
+  },
+  "devDependencies": {
+    "@types/bluebird": "^3.5.26",
+    "@types/lodash": "^4.14.129",
+    "typescript": "^3.4.5"
+  }
+}
