@@ -63,7 +63,7 @@ export interface IParametron {
 const apiFunctionsSync  = ['get', 'fetch', 'pristine', 'getValues', 'ready', 'loading']
 const apiFunctionsAsync = ['clear', 'set', 'setPersistent', 'params']
 
-export function parametronV2(opts: IParametronOpts): IParametron {
+export function parametron(opts: IParametronOpts): IParametron {
   const update    = get(opts, 'update', noop)
   const init      = get(opts, 'init', noop)
   const immediate = get(opts, 'immediate', true)

@@ -48,7 +48,7 @@ export interface IParametron {
     api: IParametronApi;
     opts?: IParametronOpts;
 }
-export declare function parametronV2(opts: IParametronOpts): IParametron;
+export declare function parametron(opts: IParametronOpts): IParametron;
 export declare class Parametron {
     data: IParametronData;
     opts: IParametronOpts;
