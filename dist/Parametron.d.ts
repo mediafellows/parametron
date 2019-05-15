@@ -25,22 +25,22 @@ export interface IParametronData {
     reqId?: number;
 }
 export interface IParametronApi {
-    clear(attribute?: string, method?: string): any;
+    clear(attribute?: string, method?: string): Promise<any>;
     get(attribute?: string, method?: string): any;
     getValues(attribute: string): any;
-    set(attribute: '_', method: 'q', search: string): any;
-    set(attribute: string, method: 'match' | 'eq' | 'ne', value: string | number): any;
-    set(attribute: string, method: 'in' | 'not_in', values: Array<string | number> | string | number): any;
-    set(attribute: string, method: 'range', start: number, end: number): any;
-    set(attribute: string, method: 'exist' | 'not_exist'): any;
-    setPersistent(attribute: '_', method: 'q', search: string): any;
-    setPersistent(attribute: string, method: 'match' | 'eq' | 'ne', value: string | number): any;
-    setPersistent(attribute: string, method: 'in' | 'not_in', values: Array<string | number> | string | number): any;
+    set(attribute: '_', method: 'q', search: string): Promise<any>;
+    set(attribute: string, method: 'match' | 'eq' | 'ne', value: string | number): Promise<any>;
+    set(attribute: string, method: 'in' | 'not_in', values: Array<string | number> | string | number): Promise<any>;
+    set(attribute: string, method: 'range', start: number, end: number): Promise<any>;
+    set(attribute: string, method: 'exist' | 'not_exist'): Promise<any>;
+    setPersistent(attribute: '_', method: 'q', search: string): Promise<any>;
+    setPersistent(attribute: string, method: 'match' | 'eq' | 'ne', value: string | number): Promise<any>;
+    setPersistent(attribute: string, method: 'in' | 'not_in', values: Array<string | number> | string | number): Promise<any>;
     setPersistent(attribute: string, method: 'range', start: number, end: number): any;
     setPersistent(attribute: string, method: 'exist' | 'not_exist'): any;
-    fire(): any;
-    pristine(): any;
-    params(params: any): any;
+    fire(): Promise<any>;
+    pristine(): boolean;
+    params(params: any): Promise<any>;
     fetch(attribute: string, method: string): any;
 }
 export interface IParametron {

@@ -24,14 +24,14 @@ function createParametron(opts) {
     lodash_1.each(apiFunctionsAsync, (fn) => {
         api[fn] = (...args) => {
             instance[fn].apply(instance, args);
-            api.fire();
+            return api.fire();
         };
     });
     api.fire = () => {
         // triggers an update before firing that indicates already parametron is running from now on
         instance.prepare();
         update(instance.data);
-        instance.fire().then(() => update(instance.data));
+        return instance.fire().then(() => update(instance.data));
     };
     if (init)
         init(instance);

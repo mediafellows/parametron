@@ -35,23 +35,23 @@ export interface IParametronData {
 }
 
 export interface IParametronApi {
-  clear(attribute?: string, method?: string)
-  get(attribute?: string, method?: string)
-  getValues(attribute: string)
-  set(attribute: '_', method: 'q', search: string)
-  set(attribute: string, method: 'match' | 'eq' | 'ne', value: string | number)
-  set(attribute: string, method: 'in' | 'not_in', values: Array<string | number> | string | number)
-  set(attribute: string, method: 'range', start: number, end: number)
-  set(attribute: string, method: 'exist' | 'not_exist')
-  setPersistent(attribute: '_', method: 'q', search: string)
-  setPersistent(attribute: string, method: 'match' | 'eq' | 'ne', value: string | number)
-  setPersistent(attribute: string, method: 'in' | 'not_in', values: Array<string | number> | string | number)
+  clear(attribute?: string, method?: string): Promise<any>
+  get(attribute?: string, method?: string): any
+  getValues(attribute: string): any
+  set(attribute: '_', method: 'q', search: string): Promise<any>
+  set(attribute: string, method: 'match' | 'eq' | 'ne', value: string | number): Promise<any>
+  set(attribute: string, method: 'in' | 'not_in', values: Array<string | number> | string | number): Promise<any>
+  set(attribute: string, method: 'range', start: number, end: number): Promise<any>
+  set(attribute: string, method: 'exist' | 'not_exist'): Promise<any>
+  setPersistent(attribute: '_', method: 'q', search: string): Promise<any>
+  setPersistent(attribute: string, method: 'match' | 'eq' | 'ne', value: string | number): Promise<any>
+  setPersistent(attribute: string, method: 'in' | 'not_in', values: Array<string | number> | string | number): Promise<any>
   setPersistent(attribute: string, method: 'range', start: number, end: number)
   setPersistent(attribute: string, method: 'exist' | 'not_exist')
-  fire()
-  pristine()
-  params(params: any)
-  fetch(attribute: string, method: string)
+  fire(): Promise<any>
+  pristine(): boolean
+  params(params: any): Promise<any>
+  fetch(attribute: string, method: string): any
 }
 
 export interface IParametron {
@@ -80,7 +80,7 @@ export function createParametron(opts: IParametronOpts): IParametron {
   each(apiFunctionsAsync, (fn) => {
     api[fn] = (...args) => {
       instance[fn].apply(instance, args)
-      api.fire()
+      return api.fire()
     }
   })
   api.fire = () => {
@@ -88,7 +88,7 @@ export function createParametron(opts: IParametronOpts): IParametron {
     instance.prepare()
     update(instance.data)
 
-    instance.fire().then(() => update(instance.data))
+    return instance.fire().then(() => update(instance.data))
   }
 
   if (init) init(instance)
