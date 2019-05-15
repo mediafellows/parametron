@@ -1,5 +1,5 @@
 import {
-  parametron,
+  createParametron,
   Parametron,
   IParametron,
   IParametronApi,
@@ -7,7 +7,7 @@ import {
 } from './Parametron'
 
 export {
-  parametron,
+  createParametron,
   Parametron,
   IParametron,
   IParametronApi,

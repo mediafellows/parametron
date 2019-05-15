@@ -10,7 +10,7 @@ const bluebird_1 = __importDefault(require("bluebird"));
 bluebird_1.default.config({ cancellation: true });
 const apiFunctionsSync = ['get', 'fetch', 'pristine', 'getValues', 'ready', 'loading'];
 const apiFunctionsAsync = ['clear', 'set', 'setPersistent', 'params'];
-function parametron(opts) {
+function createParametron(opts) {
     const update = lodash_1.get(opts, 'update', lodash_1.noop);
     const init = lodash_1.get(opts, 'init', lodash_1.noop);
     const immediate = lodash_1.get(opts, 'immediate', true);
@@ -43,7 +43,7 @@ function parametron(opts) {
         api,
     };
 }
-exports.parametron = parametron;
+exports.createParametron = createParametron;
 const filterByAttributeMethod = (attribute, method) => {
     return (filter) => {
         const [attr, meth] = filter;
