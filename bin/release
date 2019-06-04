@@ -57,7 +57,7 @@ exec('tsc', (result) => {
   if (!result.success) abort("sorry, 'tsc' did not succeed")
 })
 
-exec('git add --update', (result) => {
+exec('git add --all', (result) => {
   if (!result.success) abort("failed to stage changes")
 })
 
