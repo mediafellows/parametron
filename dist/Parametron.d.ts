@@ -1,5 +1,5 @@
 import Promise from 'bluebird';
-import { IConfig } from 'chipmunk';
+import { IChipmunk } from 'chipmunk';
 export interface IParametronOpts {
     model: 'pm.product' | 'am.asset';
     stats?: string;
@@ -49,13 +49,13 @@ export interface IParametron {
     api: IParametronApi;
     opts?: IParametronOpts;
 }
-export declare function createParametron(opts: IParametronOpts, config: IConfig): IParametron;
+export declare function createParametron(opts: IParametronOpts, chipmunk: IChipmunk): IParametron;
 export declare class Parametron {
     data: IParametronData;
     opts: IParametronOpts;
     private pact;
     private chipmunk;
-    constructor(opts: IParametronOpts, config: IConfig);
+    constructor(opts: IParametronOpts, chipmunk: IChipmunk);
     getValues(attribute: string): any;
     clear(attribute?: string, method?: string): void;
     get(attribute?: string, method?: string): any[];

@@ -5,16 +5,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const lodash_1 = require("lodash");
 const bluebird_1 = __importDefault(require("bluebird"));
-const chipmunk_1 = __importDefault(require("chipmunk"));
 // enable promise cancelling
 bluebird_1.default.config({ cancellation: true });
 const apiFunctionsSync = ['get', 'fetch', 'pristine', 'getValues', 'ready', 'loading'];
 const apiFunctionsAsync = ['clear', 'set', 'setPersistent', 'params'];
-function createParametron(opts, config) {
+function createParametron(opts, chipmunk) {
     const update = lodash_1.get(opts, 'update', lodash_1.noop);
     const init = lodash_1.get(opts, 'init', lodash_1.noop);
     const immediate = lodash_1.get(opts, 'immediate', true);
-    const instance = new Parametron(opts, config);
+    const instance = new Parametron(opts, chipmunk);
     const api = {};
     lodash_1.each(apiFunctionsSync, (fn) => {
         api[fn] = (...args) => {
@@ -76,8 +75,8 @@ const emptyResults = {
     aggregations: {},
 };
 class Parametron {
-    constructor(opts, config) {
-        this.chipmunk = chipmunk_1.default(config);
+    constructor(opts, chipmunk) {
+        this.chipmunk = chipmunk;
         this.opts = lodash_1.cloneDeep(lodash_1.merge({}, { params: initialParams }, opts));
         this.data = lodash_1.cloneDeep(lodash_1.merge({}, initialParams, initialData, emptyResults));
         if (lodash_1.isEmpty(this.opts.model))
