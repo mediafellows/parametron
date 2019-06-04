@@ -1,6 +1,6 @@
 import {cloneDeep, pickBy, pick, get, isNull, isUndefined, compact, noop, isEmpty, merge, extend, map, remove, replace, filter, each, first, slice, reduce} from 'lodash'
-import chch from 'chinchilla'
 import Promise from 'bluebird'
+import createChipmunk, {IConfig, IChipmunk} from 'chipmunk'
 
 import camelize from './camelize'
 
@@ -63,12 +63,12 @@ export interface IParametron {
 const apiFunctionsSync  = ['get', 'fetch', 'pristine', 'getValues', 'ready', 'loading']
 const apiFunctionsAsync = ['clear', 'set', 'setPersistent', 'params']
 
-export function createParametron(opts: IParametronOpts): IParametron {
+export function createParametron(opts: IParametronOpts, config: IConfig): IParametron {
   const update    = get(opts, 'update', noop)
   const init      = get(opts, 'init', noop)
   const immediate = get(opts, 'immediate', true)
 
-  const instance = new Parametron(opts)
+  const instance = new Parametron(opts, config)
 
   const api = {} as IParametronApi
 
@@ -137,8 +137,10 @@ export class Parametron {
   public data: IParametronData
   public opts: IParametronOpts
   private pact: Promise<any>
+  private chipmunk: IChipmunk
 
-  constructor(opts: IParametronOpts) {
+  constructor(opts: IParametronOpts, config: IConfig) {
+    this.chipmunk = createChipmunk(config)
     this.opts = cloneDeep(merge({}, {params: initialParams}, opts))
     this.data = cloneDeep(merge({}, initialParams, initialData, emptyResults))
 
@@ -273,36 +275,26 @@ export class Parametron {
 
     this.pact = new Promise((resolve, reject) => {
       const filters = this.data.persistentFilters.concat(this.data.filters)
-      const body = chch.new('viscacha', 'request', {
-        request: {
-          model: this.opts.model,
-          opts: { rawRequest: true },
-          action: this.opts.action || '$c.search',
-          params: this.opts.params,
-          body: merge({}, this.opts.params, {
-            search: { filters },
-            stats: this.opts.stats,
-          }),
-        },
-        schema: this.opts.schema,
+      const body = merge({}, this.opts.params, {
+        search: { filters },
+        stats: this.opts.stats,
       })
 
-      chch(body).$c('get', {}, { rawRequest: true, rawResult: true }).then((result) => {
+      const {params, schema} = this.opts
+
+      this.chipmunk.action(this.opts.model, this.opts.action || 'search', {
+        body,
+        params,
+        schema,
+      }).then((result) => {
         extend(this.data, {
           running: false,
           objects: result.objects,
+          aggregations: result.aggregations,
           totalCount: result.pagination.total_count,
           totalPages: result.pagination.total_pages,
         })
-        const aggregations = reduce(result.aggregations, (aggs, result, key) => {
-          let values
-          key = replace(key, 'count_by_', '')
-          values = map(result.buckets, (v) => ({ value: v.key, count: v.doc_count }))
 
-          return extend(aggs, { [key]: values })
-        }, {})
-
-        this.data.aggregations = aggregations
         resolve(this.data)
       })
       .catch((err) => {

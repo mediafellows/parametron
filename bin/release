@@ -1,0 +1,80 @@
+#!/usr/bin/env node
+
+const {spawnSync} = require('child_process')
+const {exit} = require('process')
+const _ = require('lodash')
+
+const abort = (msg) => {
+  console.log('aborted. ' + msg)
+  exit()
+}
+
+const exec = (cmd, cb) => {
+  const args = _.isArray(cmd) ? cmd : cmd.split(' ')
+  console.log('executing:', args.join(' '))
+  const cli = args.shift()
+
+  const values = spawnSync(cli, args)
+
+  const result = {
+    success: values.status === 0,
+    output: _.trim(values.stdout.toString()),
+    error: _.trim(values.stderr.toString()),
+  }
+
+  cb(result)
+}
+
+/*
+- check if current branch is master
+- check if git status is clean
+- switch to releases branch
+- merge master
+- run tsc
+- commit everything
+- push
+- checkout to master again
+*/
+
+exec('git rev-parse --abbrev-ref HEAD', (result) => {
+  if (!result.success)            abort('failed to determine current branch')
+  if (result.output !== 'master') abort('current branch is not master')
+})
+
+exec('git diff-index --quiet HEAD', (result) => {
+  if (!result.success) abort('git working dir is not clean')
+})
+
+exec('git checkout releases', (result) => {
+  if (!result.success) abort("could not switch to 'releases' branch. does it exist?")
+})
+
+exec('git merge master', (result) => {
+  if (!result.success) abort("failed to merge master")
+})
+
+exec('tsc', (result) => {
+  if (!result.success) abort("sorry, 'tsc' did not succeed")
+})
+
+exec('git add --update', (result) => {
+  if (!result.success) abort("failed to stage changes")
+})
+
+exec(['git', 'commit', '-m "new distribution release"'], (result) => {
+  if (!result.success) console.log("failed to save new commit. no typescript changes!? continuing.")
+})
+
+exec('git push', (result) => {
+  if (!result.success) abort("failed to push changes")
+})
+
+exec('git rev-parse HEAD', (result) => {
+  if (!result.success) abort("failed to read latest commit")
+
+  console.log('new version: ' + result.output)
+})
+
+exec('git checkout master', (result) => {
+  if (!result.success) abort("failed to checkout master again")
+})
