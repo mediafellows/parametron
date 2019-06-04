@@ -1,6 +1,6 @@
 import {cloneDeep, pickBy, pick, get, isNull, isUndefined, compact, noop, isEmpty, merge, extend, map, remove, replace, filter, each, first, slice, reduce} from 'lodash'
 import Promise from 'bluebird'
-import createChipmunk, {IConfig, IChipmunk} from 'chipmunk'
+import {IChipmunk} from 'chipmunk'
 
 import camelize from './camelize'
 
@@ -63,12 +63,12 @@ export interface IParametron {
 const apiFunctionsSync  = ['get', 'fetch', 'pristine', 'getValues', 'ready', 'loading']
 const apiFunctionsAsync = ['clear', 'set', 'setPersistent', 'params']
 
-export function createParametron(opts: IParametronOpts, config: IConfig): IParametron {
+export function createParametron(opts: IParametronOpts, chipmunk: IChipmunk): IParametron {
   const update    = get(opts, 'update', noop)
   const init      = get(opts, 'init', noop)
   const immediate = get(opts, 'immediate', true)
 
-  const instance = new Parametron(opts, config)
+  const instance = new Parametron(opts, chipmunk)
 
   const api = {} as IParametronApi
 
@@ -139,8 +139,8 @@ export class Parametron {
   private pact: Promise<any>
   private chipmunk: IChipmunk
 
-  constructor(opts: IParametronOpts, config: IConfig) {
-    this.chipmunk = createChipmunk(config)
+  constructor(opts: IParametronOpts, chipmunk: IChipmunk) {
+    this.chipmunk = chipmunk
     this.opts = cloneDeep(merge({}, {params: initialParams}, opts))
     this.data = cloneDeep(merge({}, initialParams, initialData, emptyResults))
 
