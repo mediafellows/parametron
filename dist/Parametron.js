@@ -209,8 +209,8 @@ class Parametron {
                     running: false,
                     objects: result.objects,
                     aggregations: result.aggregations,
-                    totalCount: result.pagination.total_count,
-                    totalPages: result.pagination.total_pages,
+                    totalCount: lodash_1.get(result, 'pagination.total_count', 0),
+                    totalPages: lodash_1.get(result, 'pagination.total_pages', 0),
                 });
                 resolve(this.data);
             })
