@@ -1,8 +1,6 @@
-import {cloneDeep, pickBy, pick, get, isNull, isUndefined, compact, noop, isEmpty, merge, extend, map, remove, replace, filter, each, first, slice, reduce} from 'lodash'
+import {cloneDeep, pickBy, pick, get, isNull, isUndefined, compact, noop, isEmpty, merge, extend, remove, filter, each, first, slice} from 'lodash'
 import Promise from 'bluebird'
 import {IChipmunk} from 'chipmunk'
-
-import camelize from './camelize'
 
 // enable promise cancelling
 Promise.config({ cancellation: true })
