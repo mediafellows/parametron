@@ -289,8 +289,8 @@ export class Parametron {
           running: false,
           objects: result.objects,
           aggregations: result.aggregations,
-          totalCount: result.pagination.total_count,
-          totalPages: result.pagination.total_pages,
+          totalCount: get(result, 'pagination.total_count', 0),
+          totalPages: get(result, 'pagination.total_pages', 0),
         })
 
         resolve(this.data)
