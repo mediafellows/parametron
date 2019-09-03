@@ -150,7 +150,7 @@ export class Parametron {
    * @param {string} attribute  the attribute to get values for
    */
   public getValues(attribute: string) {
-    const aggregations = get(this.data, `aggregations.${attribute}`)
+    const aggregations = get(this.data, `aggregations.count_by_${attribute}`)
     return aggregations || []
   }
 
