@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.5.4",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "chipmunk": "https://github.com/mediapeers/chipmunk.git#bf2f398bd13b6b1a2464f922f53858af1f32f14a"
   },
   "devDependencies": {
