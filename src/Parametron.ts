@@ -46,6 +46,11 @@ export interface IParametronApi {
   setPersistent(attribute: string, method: 'in' | 'not_in', values: Array<string | number> | string | number): Promise<any>
   setPersistent(attribute: string, method: 'range', start: number, end: number)
   setPersistent(attribute: string, method: 'exist' | 'not_exist')
+  put(attribute: '_', method: 'q', search: string): void
+  put(attribute: string, method: 'match' | 'eq' | 'ne', value: string | number): void
+  put(attribute: string, method: 'in' | 'not_in', values: Array<string | number> | string | number): void
+  put(attribute: string, method: 'range', start: number, end: number): void
+  put(attribute: string, method: 'exist' | 'not_exist'): void
   fire(): Promise<any>
   pristine(): boolean
   params(params: any): Promise<any>
@@ -87,6 +92,10 @@ export function createParametron(opts: IParametronOpts, chipmunk: IChipmunk): IP
     update(instance.data)
 
     return instance.fire().then(() => update(instance.data))
+  }
+  // like 'set' but doesn't fire immediately
+  api.put = (...args) => {
+    instance.set.apply(instance, args)
   }
 
   if (init) init(instance)
