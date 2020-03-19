@@ -53,7 +53,7 @@ exec('git merge master', (result) => {
   if (!result.success) abort("failed to merge master")
 })
 
-exec('tsc', (result) => {
+exec('yarn tsc', (result) => {
   if (!result.success) abort("sorry, 'tsc' did not succeed")
 })
 
