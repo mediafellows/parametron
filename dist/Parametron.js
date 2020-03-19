@@ -32,6 +32,10 @@ function createParametron(opts, chipmunk) {
         update(instance.data);
         return instance.fire().then(() => update(instance.data));
     };
+    // like 'set' but doesn't fire immediately
+    api.put = (...args) => {
+        instance.set.apply(instance, args);
+    };
     if (init)
         init(instance);
     if (immediate)

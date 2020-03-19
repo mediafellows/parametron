@@ -39,6 +39,11 @@ export interface IParametronApi {
     setPersistent(attribute: string, method: 'in' | 'not_in', values: Array<string | number> | string | number): Promise<any>;
     setPersistent(attribute: string, method: 'range', start: number, end: number): any;
     setPersistent(attribute: string, method: 'exist' | 'not_exist'): any;
+    put(attribute: '_', method: 'q', search: string): void;
+    put(attribute: string, method: 'match' | 'eq' | 'ne', value: string | number): void;
+    put(attribute: string, method: 'in' | 'not_in', values: Array<string | number> | string | number): void;
+    put(attribute: string, method: 'range', start: number, end: number): void;
+    put(attribute: string, method: 'exist' | 'not_exist'): void;
     fire(): Promise<any>;
     pristine(): boolean;
     params(params: any): Promise<any>;
@@ -59,7 +64,7 @@ export declare class Parametron {
     getValues(attribute: string): any;
     clear(attribute?: string, method?: string): void;
     get(attribute?: string, method?: string): any[];
-    fetch(attribute: string, method: string): {};
+    fetch(attribute: string, method: string): unknown;
     pristine(): boolean;
     set(attribute: string, method: string, value1?: any, value2?: any): void;
     setPersistent(attribute: string, method: string, value1?: any, value2?: any): void;
