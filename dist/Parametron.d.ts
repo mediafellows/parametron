@@ -44,6 +44,7 @@ export interface IParametronApi {
     put(attribute: string, method: 'in' | 'not_in', values: Array<string | number> | string | number): void;
     put(attribute: string, method: 'range', start: number, end: number): void;
     put(attribute: string, method: 'exist' | 'not_exist'): void;
+    erase(attribute?: string, method?: string): void;
     fire(): Promise<any>;
     pristine(): boolean;
     params(params: any): Promise<any>;

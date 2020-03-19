@@ -36,6 +36,10 @@ function createParametron(opts, chipmunk) {
     api.put = (...args) => {
         instance.set.apply(instance, args);
     };
+    // like 'clear' but doesn't fire immediately
+    api.erase = (...args) => {
+        instance.clear.apply(instance, args);
+    };
     if (init)
         init(instance);
     if (immediate)
