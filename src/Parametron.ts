@@ -51,6 +51,7 @@ export interface IParametronApi {
   put(attribute: string, method: 'in' | 'not_in', values: Array<string | number> | string | number): void
   put(attribute: string, method: 'range', start: number, end: number): void
   put(attribute: string, method: 'exist' | 'not_exist'): void
+  erase(attribute?: string, method?: string): void
   fire(): Promise<any>
   pristine(): boolean
   params(params: any): Promise<any>
@@ -96,6 +97,10 @@ export function createParametron(opts: IParametronOpts, chipmunk: IChipmunk): IP
   // like 'set' but doesn't fire immediately
   api.put = (...args) => {
     instance.set.apply(instance, args)
+  }
+  // like 'clear' but doesn't fire immediately
+  api.erase = (...args) => {
+    instance.clear.apply(instance, args)
   }
 
   if (init) init(instance)
