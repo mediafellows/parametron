@@ -12,7 +12,7 @@
   "dependencies": {
     "bluebird": "^3.5.4",
     "lodash": "^4.17.13",
-    "chipmunk": "https://github.com/mediafellows/chipmunk.git#49c55e4b8800f7a01cbd2e7360f4c802d54648ad"
+    "chipmunk": "https://github.com/mediafellows/chipmunk.git#e3be7178a9fd763993dbed3b939182507b98ac08"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.26",
