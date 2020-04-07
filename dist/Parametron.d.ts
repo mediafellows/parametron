@@ -65,7 +65,7 @@ export declare class Parametron {
     getValues(attribute: string): any;
     clear(attribute?: string, method?: string): void;
     get(attribute?: string, method?: string): any[];
-    fetch(attribute: string, method: string): unknown;
+    fetch(attribute: string, method: string): {};
     pristine(): boolean;
     set(attribute: string, method: string, value1?: any, value2?: any): void;
     setPersistent(attribute: string, method: string, value1?: any, value2?: any): void;
