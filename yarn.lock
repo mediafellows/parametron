@@ -2,6 +2,18 @@
 # yarn lockfile v1
 
 
+"@mediafellows/chipmunk@^1.0.0":
+  version "1.0.0"
+  resolved "https://npm.pkg.github.com/download/@mediafellows/chipmunk/1.0.0/639cdabd50857d9b8391a797d401876a2fbbd5f8c4822f546b5d22cc1f3a0782#1569b623f4bd0bdd93b599f60e51f331e0ebcc8b"
+  integrity sha512-xFdBpevtsGH27+DGtiXdNjeaj5NF6VVeMjhPuU6R7sPKMXJGyqvAtzHJTaLHN1mx158LjfZgoy4uKOYnICsHtA==
+  dependencies:
+    lodash "^4.17.13"
+    nanoid "^2.0.0"
+    querystringify "^2.1.1"
+    superagent "^5.0.5"
+    superdebug "https://github.com/mediafellows/superdebug.git#7c29e60b4c60f6f23d37a5882a6687483597f178"
+    uri-templates "^0.2.0"
+
 "@types/bluebird@^3.5.26":
   version "3.5.26"
   resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.5.26.tgz#a38c438ae84fa02431d6892edf86e46edcbca291"
@@ -42,17 +54,6 @@ chalk@^1.1.3:
     has-ansi "^2.0.0"
     strip-ansi "^3.0.0"
     supports-color "^2.0.0"
-
-"chipmunk@https://github.com/mediafellows/chipmunk.git#05505da337951d0a056e3e1adb757635af98b0f1":
-  version "0.0.2"
-  resolved "https://github.com/mediafellows/chipmunk.git#05505da337951d0a056e3e1adb757635af98b0f1"
-  dependencies:
-    lodash "^4.17.13"
-    nanoid "^2.0.0"
-    querystringify "^2.1.1"
-    superagent "^5.0.5"
-    superdebug "https://github.com/mediafellows/superdebug.git#7c29e60b4c60f6f23d37a5882a6687483597f178"
-    uri-templates "^0.2.0"
 
 combined-stream@^1.0.6:
   version "1.0.8"

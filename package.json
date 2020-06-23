@@ -1,18 +1,27 @@
 {
-  "name": "parametron",
-  "version": "0.0.1",
+  "name": "@mediafellows/parametron",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "version": "1.0.0",
   "description": "parametrize search queries",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "yarn tsc",
+    "prepublish": "yarn tsc"
   },
+  "files": [
+    "src",
+    "dist",
+    "tsconfig.json"
+  ],
   "author": "johannes-kostas goetzinger <goetzinger@mediapeers.com>",
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.5.4",
     "lodash": "^4.17.13",
-    "chipmunk": "https://github.com/mediafellows/chipmunk.git#05505da337951d0a056e3e1adb757635af98b0f1"
+    "@mediafellows/chipmunk": "^1.0.0"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.26",
