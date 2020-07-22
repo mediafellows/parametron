@@ -1,6 +1,6 @@
 import {cloneDeep, pickBy, pick, get, isNull, isUndefined, compact, noop, isEmpty, merge, extend, remove, filter, each, first, slice} from 'lodash'
 import Promise from 'bluebird'
-import {IChipmunk} from 'chipmunk'
+import {IChipmunk} from '@mediafellows/chipmunk'
 
 // enable promise cancelling
 Promise.config({ cancellation: true })
