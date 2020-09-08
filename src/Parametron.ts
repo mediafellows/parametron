@@ -1,16 +1,11 @@
 import {cloneDeep, pickBy, pick, get, isNull, isUndefined, compact, noop, isEmpty, merge, extend, remove, filter, each, first, slice} from 'lodash'
-import Promise from 'bluebird'
-import {IChipmunk} from '@mediafellows/chipmunk'
-
-// enable promise cancelling
-Promise.config({ cancellation: true })
+import {IResult, IActionOpts} from '@mediafellows/chipmunk'
 
 export interface IParametronOpts {
-  model: 'pm.product' | 'am.asset'
-  stats?: string
+  executor: (opts: IActionOpts) => Promise<IResult>
   schema: string
+  stats?: string
   immediate?: boolean
-  action?: string
   params?: any
   init?: (api: Parametron) => void
   update?: (data: IParametronData) => void
@@ -67,12 +62,12 @@ export interface IParametron {
 const apiFunctionsSync  = ['get', 'fetch', 'pristine', 'getValues', 'ready', 'loading']
 const apiFunctionsAsync = ['clear', 'set', 'setPersistent', 'params']
 
-export function createParametron(opts: IParametronOpts, chipmunk: IChipmunk): IParametron {
+export function createParametron(opts: IParametronOpts): IParametron {
   const update    = get(opts, 'update', noop)
   const init      = get(opts, 'init', noop)
   const immediate = get(opts, 'immediate', true)
 
-  const instance = new Parametron(opts, chipmunk)
+  const instance = new Parametron(opts)
 
   const api = {} as IParametronApi
 
@@ -149,14 +144,10 @@ export class Parametron {
   public data: IParametronData
   public opts: IParametronOpts
   private pact: Promise<any>
-  private chipmunk: IChipmunk
 
-  constructor(opts: IParametronOpts, chipmunk: IChipmunk) {
-    this.chipmunk = chipmunk
+  constructor(opts: IParametronOpts) {
     this.opts = cloneDeep(merge({}, {params: initialParams}, opts))
     this.data = cloneDeep(merge({}, initialParams, initialData, emptyResults))
-
-    if (isEmpty(this.opts.model)) throw new Error(`parametron: 'model' option missing`)
   }
 
   /*
@@ -282,7 +273,6 @@ export class Parametron {
 
   public fire(): Promise<IParametronData> {
     // cancel any pending request
-    if (this.pact) this.pact.cancel()
     this.prepare()
 
     this.pact = new Promise((resolve, reject) => {
@@ -294,11 +284,7 @@ export class Parametron {
 
       const {params, schema} = this.opts
 
-      this.chipmunk.action(this.opts.model, this.opts.action || 'search', {
-        body,
-        params,
-        schema,
-      }).then((result) => {
+      this.opts.executor({ body, params, schema }).then((result) => {
         extend(this.data, {
           running: false,
           objects: result.objects,
@@ -315,6 +301,6 @@ export class Parametron {
       })
     })
 
-    return this.pact
+    return this.pact as unknown as Promise<IParametronData>
   }
 }
