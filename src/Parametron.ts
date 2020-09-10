@@ -301,6 +301,6 @@ export class Parametron {
       })
     })
 
-    return this.pact as unknown as Promise<IParametronData>
+    return this.pact
   }
 }
