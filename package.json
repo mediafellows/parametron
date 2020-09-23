@@ -3,7 +3,7 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "parametrize search queries",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,9 +19,9 @@
   "author": "johannes-kostas goetzinger <goetzinger@mediapeers.com>",
   "license": "ISC",
   "dependencies": {
+    "@mediafellows/chipmunk": "^1.0.0",
     "bluebird": "^3.5.4",
-    "lodash": "^4.17.13",
-    "@mediafellows/chipmunk": "^1.0.0"
+    "lodash": "^4.17.13"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.26",
