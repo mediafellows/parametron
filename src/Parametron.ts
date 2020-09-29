@@ -32,19 +32,19 @@ export interface IParametronApi {
   get(attribute?: string, method?: string): any
   getValues(attribute: string): any
   set(attribute: '_', method: 'q', search: string): Promise<any>
-  set(attribute: string, method: 'match' | 'eq' | 'ne', value: string | number): Promise<any>
+  set(attribute: string, method: 'match' | 'eq' | 'ne', value: string | number | boolean): Promise<any>
   set(attribute: string, method: 'in' | 'not_in', values: Array<string | number> | string | number): Promise<any>
-  set(attribute: string, method: 'range', start: number, end: number): Promise<any>
+  set(attribute: string, method: 'range', start: number | string, end: number| string): Promise<any>
   set(attribute: string, method: 'exist' | 'not_exist'): Promise<any>
   setPersistent(attribute: '_', method: 'q', search: string): Promise<any>
-  setPersistent(attribute: string, method: 'match' | 'eq' | 'ne', value: string | number): Promise<any>
+  setPersistent(attribute: string, method: 'match' | 'eq' | 'ne', value: string | number | boolean): Promise<any>
   setPersistent(attribute: string, method: 'in' | 'not_in', values: Array<string | number> | string | number): Promise<any>
-  setPersistent(attribute: string, method: 'range', start: number, end: number)
+  setPersistent(attribute: string, method: 'range', start: number | string, end: number| string)
   setPersistent(attribute: string, method: 'exist' | 'not_exist')
   put(attribute: '_', method: 'q', search: string): void
-  put(attribute: string, method: 'match' | 'eq' | 'ne', value: string | number): void
+  put(attribute: string, method: 'match' | 'eq' | 'ne', value: string | number | boolean): void
   put(attribute: string, method: 'in' | 'not_in', values: Array<string | number> | string | number): void
-  put(attribute: string, method: 'range', start: number, end: number): void
+  put(attribute: string, method: 'range', start: number | string, end: number| string): void
   put(attribute: string, method: 'exist' | 'not_exist'): void
   erase(attribute?: string, method?: string): void
   fire(): Promise<any>
