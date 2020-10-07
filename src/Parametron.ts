@@ -60,7 +60,7 @@ export interface IParametron {
 
 const apiFunctions= [
   'getAggregations', 'getFilters', 'getFilterValues',
-  'setFilter', 'dropFilter',
+  'setFilter', 'dropFilters',
   'setParams', 'dropParams',
   'setPersistentFilter',
 ]
@@ -163,7 +163,7 @@ export class Parametron {
    * @param {string} [attribute] optional the attribute to clear filters for
    * @param {string} [method]    optional filter method (e.g. 'q', 'eq'...)
    */
-  public dropFilter(attribute?: string, method?: string) {
+  public dropFilters(attribute?: string, method?: string) {
     remove(this.data.filters, filterByAttributeMethod(attribute, method))
   }
 
@@ -213,27 +213,27 @@ export class Parametron {
   public setFilter(attribute: string, method: string, value1?, value2?) {
     switch (method) {
       case 'q':
-        this.dropFilter('_')
+        this.dropFilters('_')
         break
       case 'match':
-        this.dropFilter(attribute, 'match')
+        this.dropFilters(attribute, 'match')
         break
       case 'eq':
       case 'ne':
-        this.dropFilter(attribute, 'eq')
-        this.dropFilter(attribute, 'ne')
+        this.dropFilters(attribute, 'eq')
+        this.dropFilters(attribute, 'ne')
         break
       case 'range':
       case 'in':
       case 'not_in':
-        this.dropFilter(attribute, 'range')
-        this.dropFilter(attribute, 'in')
-        this.dropFilter(attribute, 'not_in')
+        this.dropFilters(attribute, 'range')
+        this.dropFilters(attribute, 'in')
+        this.dropFilters(attribute, 'not_in')
         break
       case 'exist':
       case 'not_exist':
-        this.dropFilter(attribute, 'exist')
-        this.dropFilter(attribute, 'not_exist')
+        this.dropFilters(attribute, 'exist')
+        this.dropFilters(attribute, 'not_exist')
         break
     }
 
