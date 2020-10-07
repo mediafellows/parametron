@@ -10,8 +10,8 @@ import { createParametron, IParametronData, IParametronApi } from '@mediafellows
 const parametron = createParametron({
   executor: (opts) => chipmunk.action('pm.product', 'search', opts),
   schema: productListSchema,
-  params: { only_roots: 'false' },
   init: (api: IParametronApi) => {
+    api.setParams({ only_roots: 'false' });
     api.setPersistentFilter('id', 'in', productIds);
   },
   update: (data: IParametronData) => {
