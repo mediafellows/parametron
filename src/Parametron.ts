@@ -59,7 +59,6 @@ export interface IParametron {
 }
 
 const apiFunctions= [
-  'getAggregations',
   'setFilter',
   'dropFilters',
   'setParams',
@@ -68,6 +67,7 @@ const apiFunctions= [
 ]
 
 const apiFunctionsWithReturn = [
+  'getAggregations',
   'getFilters',
   'getFilterValues',
   'pristine'
