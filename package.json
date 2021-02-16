@@ -9,7 +9,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "yarn tsc",
-    "build:watch": "yarn tsc -w",
+    "build:watch": "yarn build -w",
     "prepublish": "yarn build"
   },
   "files": [
