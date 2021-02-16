@@ -59,10 +59,18 @@ export interface IParametron {
 }
 
 const apiFunctions= [
-  'getAggregations', 'getFilters', 'getFilterValues',
-  'setFilter', 'dropFilters',
-  'setParams', 'dropParams',
+  'setFilter',
+  'dropFilters',
+  'setParams',
+  'dropParams',
   'setPersistentFilter',
+]
+
+const apiFunctionsWithReturn = [
+  'getAggregations',
+  'getFilters',
+  'getFilterValues',
+  'pristine'
 ]
 
 export function createParametron(opts: IParametronOpts): IParametron {
@@ -80,6 +88,12 @@ export function createParametron(opts: IParametronOpts): IParametron {
     }
   })
 
+  each(apiFunctionsWithReturn, (fn) => {
+    api[fn] = (...args) => {
+      return instance[fn].apply(instance, args)
+    }
+  })
+
   api.fire = () => {
     // triggers an update before firing that indicates already parametron is running from now on
     instance.prepare()
@@ -89,10 +103,6 @@ export function createParametron(opts: IParametronOpts): IParametron {
       update(instance.data)
       return instance.data
     })
-  }
-
-  api.pristine = (): boolean => {
-    return instance.pristine()
   }
 
   if (init) {

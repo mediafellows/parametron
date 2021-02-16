@@ -3,13 +3,14 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "parametrize search queries",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "yarn tsc",
-    "prepublish": "yarn tsc"
+    "build": "yarn tsc",
+    "build:watch": "yarn build -w",
+    "prepublish": "yarn build"
   },
   "files": [
     "src",
