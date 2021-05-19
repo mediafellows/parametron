@@ -21,7 +21,7 @@
   "license": "ISC",
   "dependencies": {
     "@mediafellows/chipmunk": "^1.0.0",
-    "lodash": "^4.17.13"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.129",
