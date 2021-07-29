@@ -1,4 +1,4 @@
-import {cloneDeep, pickBy, pick, get, isNull, isUndefined, compact, noop, isEmpty, merge, extend, remove, filter, each, first, slice} from 'lodash'
+import {cloneDeep, pickBy, pick, get, isNull, isUndefined, compact, noop, isEmpty, merge, extend, remove, filter, each, first, slice, sortBy, indexOf} from 'lodash'
 import {IResult, IActionOpts} from '@mediafellows/chipmunk'
 
 export interface IParametronOpts {
@@ -36,6 +36,7 @@ export interface IParametronApi {
   setFilter(attribute: string, method: 'in' | 'not_in', values: Array<string | number> | string | number): IParametronApi
   setFilter(attribute: string, method: 'range', start: number | string, end: number| string): IParametronApi
   setFilter(attribute: string, method: 'exist' | 'not_exist'): IParametronApi
+  setFixedOrder(ids: number[]): IParametronApi
   dropFilters(attribute?: string, method?: string): IParametronApi
 
   setPersistentFilter(attribute: '_', method: 'q', search: string): IParametronApi
@@ -62,6 +63,7 @@ const apiFunctions= [
   'setFilter',
   'dropFilters',
   'setParams',
+  'setFixedOrder',
   'dropParams',
   'setPersistentFilter',
 ]
@@ -152,6 +154,7 @@ export class Parametron {
   public data: IParametronData
   public opts: IParametronOpts
   private pact: Promise<any>
+  private fixedIdOrder = [];
 
   constructor(opts: IParametronOpts) {
     this.opts = cloneDeep(opts)
@@ -265,8 +268,23 @@ export class Parametron {
    */
   public setParams(params) {
     const newParams = merge({}, this.data.params, params)
+
+    // new ordering -> removes fixed id order again
+    if (newParams.order || newParams.sort) {
+      this.fixedIdOrder = [];
+    }
+
     this.data.params = pickBy(newParams, (value) => !isNull(value) && !isUndefined(value))
     return this.data.params
+  }
+
+  /**
+   * this is a workaround to force returned objects to be in the given order of ids
+   * see https://issues.mediafellows.com/issues/75758
+   */
+  public setFixedOrder(ids: number[]) {
+    this.fixedIdOrder = ids
+    this.setParams({ sort: null, order: null, page: 1, per: 250 })
   }
 
   /**
@@ -300,9 +318,15 @@ export class Parametron {
       const { params } = this.data
 
       this.opts.executor({ body, params, schema }).then((result) => {
+        let objects = result.objects;
+
+        if (this.fixedIdOrder.length > 0) {
+          objects = sortBy(objects, x => indexOf(this.fixedIdOrder, x.id))
+        }
+
         extend(this.data, {
           running: false,
-          objects: result.objects,
+          objects: objects,
           aggregations: result.aggregations,
           totalCount: get(result, 'pagination.total_count', 0),
           totalPages: get(result, 'pagination.total_pages', 0),
