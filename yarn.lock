@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@mediafellows/chipmunk@^2.0.1":
-  version "2.0.1"
-  resolved "https://npm.pkg.github.com/download/@mediafellows/chipmunk/2.0.1/59ebbf3c9af581e87c6dbcba75b4399692614271633334d5d071ac6b50de3327#3ab8e59693c6f568135e7201377ee0d323b87385"
-  integrity sha512-symtKNz47UWxN4LJBACEKSlY12+9/NJb+RozMYFgrlkgA2Q2fUbtaf5Ai17KevVjmHyC4L06guLRveerQFYFcA==
+"@mediafellows/chipmunk@^2.0.3":
+  version "2.0.3"
+  resolved "https://npm.pkg.github.com/download/@mediafellows/chipmunk/2.0.3/383a023ab7539ab95eae375527ac2ead82eccef77060f04e49bf066d7084a8b2#76bbb1a5ea9f7793e21cb5b61acf392daca03f77"
+  integrity sha512-OgJdxB6PruSNNJR8icYBNn5vq/ZPqNJVlERy0xhwgae5yvYOH6Ka2QVBPbK3GyPnhlW41v4LyMciV0ufWzFyJg==
   dependencies:
     "@types/superagent" "^4.1.1"
     lodash "^4.17.13"
@@ -238,10 +238,10 @@ supports-color@^2.0.0:
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-2.0.0.tgz#535d045ce6b6363fa40117084629995e9df324c7"
   integrity sha1-U10EXOa2Nj+kARcIRimZXp3zJMc=
 
-typescript@^3.4.5:
-  version "3.4.5"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.4.5.tgz#2d2618d10bb566572b8d7aad5180d84257d70a99"
-  integrity sha512-YycBxUb49UUhdNMU5aJ7z5Ej2XGmaIBL0x34vZ82fn3hGvD+bgrMrVDpatgz2f7YxUMJxMkbWxJZeAvDxVe7Vw==
+typescript@^3.8.3:
+  version "3.9.10"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.10.tgz#70f3910ac7a51ed6bef79da7800690b19bf778b8"
+  integrity sha512-w6fIxVE/H1PkLKcCPsFqKE7Kv7QUwhU8qQY2MueZXWx5cPZdwFupLgKK3vntcK98BtNHZtAF4LA/yl2a7k8R6Q==
 
 uri-templates@^0.2.0:
   version "0.2.0"
