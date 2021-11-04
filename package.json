@@ -20,7 +20,7 @@
   "author": "johannes-kostas goetzinger <goetzinger@mediapeers.com>",
   "license": "ISC",
   "dependencies": {
-    "@mediafellows/chipmunk": "^1.0.0",
+    "@mediafellows/chipmunk": "^2.0.1",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
