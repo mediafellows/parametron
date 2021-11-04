@@ -2,22 +2,40 @@
 # yarn lockfile v1
 
 
-"@mediafellows/chipmunk@^1.0.0":
-  version "1.0.0"
-  resolved "https://npm.pkg.github.com/download/@mediafellows/chipmunk/1.0.0/639cdabd50857d9b8391a797d401876a2fbbd5f8c4822f546b5d22cc1f3a0782#1569b623f4bd0bdd93b599f60e51f331e0ebcc8b"
-  integrity sha512-xFdBpevtsGH27+DGtiXdNjeaj5NF6VVeMjhPuU6R7sPKMXJGyqvAtzHJTaLHN1mx158LjfZgoy4uKOYnICsHtA==
+"@mediafellows/chipmunk@^2.0.1":
+  version "2.0.1"
+  resolved "https://npm.pkg.github.com/download/@mediafellows/chipmunk/2.0.1/59ebbf3c9af581e87c6dbcba75b4399692614271633334d5d071ac6b50de3327#3ab8e59693c6f568135e7201377ee0d323b87385"
+  integrity sha512-symtKNz47UWxN4LJBACEKSlY12+9/NJb+RozMYFgrlkgA2Q2fUbtaf5Ai17KevVjmHyC4L06guLRveerQFYFcA==
   dependencies:
+    "@types/superagent" "^4.1.1"
     lodash "^4.17.13"
-    nanoid "^2.0.0"
     querystringify "^2.1.1"
     superagent "^5.0.5"
     superdebug "https://github.com/mediafellows/superdebug.git#7c29e60b4c60f6f23d37a5882a6687483597f178"
     uri-templates "^0.2.0"
 
+"@types/cookiejar@*":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@types/cookiejar/-/cookiejar-2.1.2.tgz#66ad9331f63fe8a3d3d9d8c6e3906dd10f6446e8"
+  integrity sha512-t73xJJrvdTjXrn4jLS9VSGRbz0nUY3cl2DMGDU48lKl+HR9dbbjW2A9r3g40VA++mQpy6uuHg33gy7du2BKpog==
+
 "@types/lodash@^4.14.129":
   version "4.14.129"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.129.tgz#9aaca391db126802482655c48dd79a814488202f"
   integrity sha512-oYaV0eSlnOacOr7i4X1FFdH8ttSlb57gu3I9MuStIv2CYkISEY84dNHYsC3bF6sNH7qYcu1BtVrCtQ8Q4KPTfQ==
+
+"@types/node@*":
+  version "16.11.6"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.11.6.tgz#6bef7a2a0ad684cf6e90fcfe31cecabd9ce0a3ae"
+  integrity sha512-ua7PgUoeQFjmWPcoo9khiPum3Pd60k4/2ZGXt18sm2Slk0W0xZTqt5Y0Ny1NyBiN1EVQ/+FaF9NcY4Qe6rwk5w==
+
+"@types/superagent@^4.1.1":
+  version "4.1.13"
+  resolved "https://registry.yarnpkg.com/@types/superagent/-/superagent-4.1.13.tgz#0aaa3f4ff9404b94932d1dcdfb7f3d39d23997a0"
+  integrity sha512-YIGelp3ZyMiH0/A09PMAORO0EBGlF5xIKfDpK74wdYvWUs2o96b5CItJcWPdH409b7SAXIIG6p8NdU/4U2Maww==
+  dependencies:
+    "@types/cookiejar" "*"
+    "@types/node" "*"
 
 ansi-regex@^2.0.0:
   version "2.1.1"
@@ -148,11 +166,6 @@ ms@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
   integrity sha512-tgp+dl5cGk28utYktBsrFqA7HKgrhgPsg6Z/EfhWI4gl1Hwq8B/GmY/0oXZ6nF8hDVesS/FpnYaD/kOWhYQvyg==
-
-nanoid@^2.0.0:
-  version "2.1.11"
-  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-2.1.11.tgz#ec24b8a758d591561531b4176a01e3ab4f0f0280"
-  integrity sha512-s/snB+WGm6uwi0WjsZdaVcuf3KJXlfGl2LcxgwkEwJF0D/BWzVWAZW/XY4bFaiR7s0Jk3FPvlnepg1H1b1UwlA==
 
 qs@^6.7.0:
   version "6.7.0"
