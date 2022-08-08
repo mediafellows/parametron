@@ -19,11 +19,13 @@
   ],
   "author": "johannes-kostas goetzinger <goetzinger@mediapeers.com>",
   "license": "ISC",
-  "dependencies": {
-    "@mediafellows/chipmunk": "^2.0.3",
+  "peerDependencies": {
+    "@mediafellows/chipmunk": "^2.1.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
+    "@mediafellows/chipmunk": "^2.1.0",
+    "lodash": "^4.17.21",
     "@types/lodash": "^4.14.129",
     "typescript": "^3.8.3"
   }
