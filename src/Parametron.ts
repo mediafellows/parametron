@@ -249,11 +249,18 @@ export class Parametron {
   }
 
   public deserialize(input: string) {
+    let data = {};
+
     try {
-      return JSON.parse(atob(input));
-    } catch (e) {
-      return {};
-    }
+      data = JSON.parse(atob(input));
+    } catch (e) { }
+
+    const result = {};
+    if (data["a"]) result["params"] = data["a"];
+    if (data["b"]) result["filters"] = data["b"];
+    if (data["c"]) result["persistentFilters"] = data["c"];
+
+    return result;
   }
 
   /*
