@@ -19,6 +19,7 @@ import {
   indexOf,
 } from "lodash";
 import { IResult, IActionOpts } from "@mediafellows/chipmunk";
+import queryString from "query-string";
 
 export interface IParametronOpts {
   executor: (opts: IActionOpts) => Promise<IResult>;
@@ -26,6 +27,7 @@ export interface IParametronOpts {
   schema?: string;
   init?: (api: Parametron) => void;
   update?: (data: IParametronData) => void;
+  serializeToURL?: boolean;
 }
 
 export interface IParametronData {
@@ -127,11 +129,21 @@ const apiFunctionsWithReturn = [
   "pristine",
 ];
 
+function readQueryState() {
+  return queryString.parse(location.search, { parseNumbers: true, parseBooleans: true});
+}
+
 export function createParametron(opts: IParametronOpts): IParametron {
   const update = get(opts, "update", noop);
   const init = get(opts, "init", noop);
 
   const instance = new Parametron(opts);
+
+  const query = readQueryState();
+  if (query.p) {
+    const state = instance.deserialize(query.p as string);
+    instance.data = merge(instance.data, state);
+  }
 
   const api = {} as IParametronApi;
 
@@ -154,6 +166,12 @@ export function createParametron(opts: IParametronOpts): IParametron {
     update(instance.data);
 
     return instance.fire().then(() => {
+      if (opts.serializeToURL && history.replaceState) {
+        const query = readQueryState();
+        query.p = instance.serialize();
+        var newurl = location.protocol + "//" + location.host + location.pathname + '?' + queryString.stringify(query);
+        history.replaceState({ path: newurl }, '', newurl);
+      }
       update(instance.data);
       return instance.data;
     }).catch((err) => {
@@ -223,6 +241,19 @@ export class Parametron {
       ...emptyResults,
       params: initialParams,
     });
+  }
+
+  public serialize(): string {
+    const data = { a: this.data.params, b: this.data.filters, c: this.data.persistentFilters };
+    return btoa(JSON.stringify(data));
+  }
+
+  public deserialize(input: string) {
+    try {
+      return JSON.parse(atob(input));
+    } catch (e) {
+      return {};
+    }
   }
 
   /*
