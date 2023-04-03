@@ -280,6 +280,7 @@ export class Parametron {
    */
   public dropFilters(attribute?: string, method?: string) {
     remove(this.data.filters, filterByAttributeMethod(attribute, method));
+    this.data.params.page = 1;
   }
 
   /*
