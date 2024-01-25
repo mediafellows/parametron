@@ -52,7 +52,7 @@ export interface IParametronApi {
   getFilters(attribute?: string, method?: string): any;
   getFilterValues(attribute: string, method: string): any;
 
-  setFilter(attribute: "_", method: "q", search: string): IParametronApi;
+  setFilter(attribute: "_", method: "q", search: string, searchOperator: string): IParametronApi;
   setFilter(
     attribute: string,
     method: "match" | "eq" | "ne",
@@ -76,7 +76,8 @@ export interface IParametronApi {
   setPersistentFilter(
     attribute: "_",
     method: "q",
-    search: string
+    search: string,
+    searchOperator: string,
   ): IParametronApi;
   setPersistentFilter(
     attribute: string,
