@@ -52,7 +52,12 @@ export interface IParametronApi {
   getFilters(attribute?: string, method?: string): any;
   getFilterValues(attribute: string, method: string): any;
 
-  setFilter(attribute: "_", method: "q", search: string, searchOperator: string): IParametronApi;
+  setFilter(
+    attribute: "_" | "+main",
+    method: "q",
+    search: string,
+    searchOperator: string
+  ): IParametronApi;
   setFilter(
     attribute: string,
     method: "match" | "eq" | "ne",
@@ -77,7 +82,7 @@ export interface IParametronApi {
     attribute: "_",
     method: "q",
     search: string,
-    searchOperator: string,
+    searchOperator: string
   ): IParametronApi;
   setPersistentFilter(
     attribute: string,
@@ -131,7 +136,10 @@ const apiFunctionsWithReturn = [
 ];
 
 function readQueryState() {
-  return queryString.parse(location.search, { parseNumbers: true, parseBooleans: true});
+  return queryString.parse(location.search, {
+    parseNumbers: true,
+    parseBooleans: true,
+  });
 }
 
 export function createParametron(opts: IParametronOpts): IParametron {
@@ -166,23 +174,32 @@ export function createParametron(opts: IParametronOpts): IParametron {
     instance.prepare();
     update(instance.data);
 
-    return instance.fire().then(() => {
-      if (opts.serializeToURL && history.replaceState) {
-        const query = readQueryState();
-        query.p = instance.serialize();
-        var newurl = location.protocol + "//" + location.host + location.pathname + '?' + queryString.stringify(query);
-        history.replaceState({ path: newurl }, '', newurl);
-      }
-      update(instance.data);
-      return instance.data;
-    }).catch((err) => {
-      if (err?.message === 'AbortedExecution') {
-        // if this execution was aborted, do not call the update callback
-        // but return with current data instead
+    return instance
+      .fire()
+      .then(() => {
+        if (opts.serializeToURL && history.replaceState) {
+          const query = readQueryState();
+          query.p = instance.serialize();
+          var newurl =
+            location.protocol +
+            "//" +
+            location.host +
+            location.pathname +
+            "?" +
+            queryString.stringify(query);
+          history.replaceState({ path: newurl }, "", newurl);
+        }
+        update(instance.data);
         return instance.data;
-      }
-      throw (err);
-    });
+      })
+      .catch((err) => {
+        if (err?.message === "AbortedExecution") {
+          // if this execution was aborted, do not call the update callback
+          // but return with current data instead
+          return instance.data;
+        }
+        throw err;
+      });
   };
 
   if (init) {
@@ -245,7 +262,11 @@ export class Parametron {
   }
 
   public serialize(): string {
-    const data = { a: this.data.params, b: this.data.filters, c: this.data.persistentFilters };
+    const data = {
+      a: this.data.params,
+      b: this.data.filters,
+      c: this.data.persistentFilters,
+    };
     return btoa(JSON.stringify(data));
   }
 
@@ -254,7 +275,7 @@ export class Parametron {
 
     try {
       data = JSON.parse(atob(input));
-    } catch (e) { }
+    } catch (e) {}
 
     const result = {};
     if (data["a"]) result["params"] = data["a"];
@@ -448,7 +469,7 @@ export class Parametron {
         .then((result) => {
           // in case another request has been fired meanwhile, this one should fail
           if (currentId !== this.pactId) {
-            return reject(new Error('AbortedExecution'));
+            return reject(new Error("AbortedExecution"));
           }
 
           let objects = result.objects;
