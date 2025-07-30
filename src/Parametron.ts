@@ -74,6 +74,11 @@ export interface IParametronApi {
     start: number | string,
     end: number | string
   ): IParametronApi;
+  setFilter(
+    attribute: string,
+    method: "gt",
+    value: string | number
+  ): IParametronApi;
   setFilter(attribute: string, method: "exist" | "not_exist"): IParametronApi;
   setFixedOrder(ids: number[]): IParametronApi;
   dropFilters(attribute?: string, method?: string): IParametronApi;
@@ -104,7 +109,11 @@ export interface IParametronApi {
     attribute: string,
     method: "exist" | "not_exist"
   ): IParametronApi;
-
+  setPersistentFilter(
+    attribute: string,
+    method: "gt", 
+    value: string | number
+  ): IParametronApi;
   setParams(params: any): IParametronApi;
   dropParams(...keys: string[]): IParametronApi;
 
@@ -378,6 +387,9 @@ export class Parametron {
       case "not_exist":
         this.dropFilters(attribute, "exist");
         this.dropFilters(attribute, "not_exist");
+        break;
+        case "gt":
+        this.dropFilters(attribute, "gt");
         break;
     }
 
