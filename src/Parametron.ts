@@ -47,7 +47,7 @@ export interface IParametronData {
   aggregations?: any;
 }
 
-export type SearchOperator = "and" | "or";
+export type SearchOperator = "AND" | "OR";
 
 export interface IParametronApi {
   getAggregations(attribute: string): any[];
@@ -64,13 +64,13 @@ export interface IParametronApi {
     attribute: string,
     method: "match" | "eq" | "ne",
     value: string | number | boolean,
-    searchOperator: SearchOperator
+    searchOperator?: SearchOperator
   ): IParametronApi;
   setFilter(
     attribute: string,
     method: "in" | "not_in",
     values: Array<string | number> | string | number,
-    searchOperator: SearchOperator
+    searchOperator?: SearchOperator
   ): IParametronApi;
   setFilter(
     attribute: string,
@@ -97,13 +97,13 @@ export interface IParametronApi {
     attribute: string,
     method: "match" | "eq" | "ne",
     value: string | number | boolean,
-    searchOperator: SearchOperator
+    searchOperator?: SearchOperator
   ): IParametronApi;
   setPersistentFilter(
     attribute: string,
     method: "in" | "not_in",
     values: Array<string | number> | string | number,
-    searchOperator: SearchOperator
+    searchOperator?: SearchOperator
   ): IParametronApi;
   setPersistentFilter(
     attribute: string,
