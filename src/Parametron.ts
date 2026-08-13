@@ -47,6 +47,8 @@ export interface IParametronData {
   aggregations?: any;
 }
 
+export type SearchOperator = "and" | "or";
+
 export interface IParametronApi {
   getAggregations(attribute: string): any[];
   getFilters(attribute?: string, method?: string): any;
@@ -56,17 +58,19 @@ export interface IParametronApi {
     attribute: "_" | "+main",
     method: "q",
     search: string,
-    searchOperator: string
+    searchOperator: SearchOperator
   ): IParametronApi;
   setFilter(
     attribute: string,
     method: "match" | "eq" | "ne",
-    value: string | number | boolean
+    value: string | number | boolean,
+    searchOperator: SearchOperator
   ): IParametronApi;
   setFilter(
     attribute: string,
     method: "in" | "not_in",
-    values: Array<string | number> | string | number
+    values: Array<string | number> | string | number,
+    searchOperator: SearchOperator
   ): IParametronApi;
   setFilter(
     attribute: string,
@@ -87,17 +91,19 @@ export interface IParametronApi {
     attribute: "_",
     method: "q",
     search: string,
-    searchOperator: string
+    searchOperator: SearchOperator
   ): IParametronApi;
   setPersistentFilter(
     attribute: string,
     method: "match" | "eq" | "ne",
-    value: string | number | boolean
+    value: string | number | boolean,
+    searchOperator: SearchOperator
   ): IParametronApi;
   setPersistentFilter(
     attribute: string,
     method: "in" | "not_in",
-    values: Array<string | number> | string | number
+    values: Array<string | number> | string | number,
+    searchOperator: SearchOperator
   ): IParametronApi;
   setPersistentFilter(
     attribute: string,
