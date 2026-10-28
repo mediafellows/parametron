@@ -3,7 +3,7 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },
-  "version": "4.0.4",
+  "version": "4.0.5",
   "description": "parametrize search queries",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,6 +19,9 @@
   ],
   "author": "johannes-kostas goetzinger <goetzinger@mediapeers.com>",
   "license": "ISC",
+  "dependencies": {
+      "query-string": ">=4.3.4"
+  },
   "peerDependencies": {
     "@mediafellows/chipmunk": "^2.6.13",
     "lodash": "^4.17.21",
