@@ -3,7 +3,7 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },
-  "version": "4.0.3",
+  "version": "4.0.4",
   "description": "parametrize search queries",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -20,12 +20,12 @@
   "author": "johannes-kostas goetzinger <goetzinger@mediapeers.com>",
   "license": "ISC",
   "peerDependencies": {
-    "@mediafellows/chipmunk": "^2.1.0",
+    "@mediafellows/chipmunk": "^2.6.13",
     "lodash": "^4.17.21",
     "query-string": ">=4.3.4"
   },
   "devDependencies": {
-    "@mediafellows/chipmunk": "^2.1.0",
+    "@mediafellows/chipmunk": "^2.6.13",
     "@types/lodash": "^4.14.129",
     "lodash": "^4.17.21",
     "query-string": ">=4.3.4",
