@@ -5,6 +5,7 @@
     "skipLibCheck": true,
     "target": "es6",
     "noImplicitAny": false,
+    "lib": ["ES2017", "DOM"],
     "strictNullChecks": false,
     "experimentalDecorators": true,
     "rootDir": "src",
