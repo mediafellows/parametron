@@ -21,8 +21,12 @@
   "author": "johannes-kostas goetzinger <goetzinger@mediapeers.com>",
   "license": "ISC",
   "dependencies": {
-    "@mediafellows/chipmunk": "^2.6.14",
+    "@mediafellows/chipmunk": "^2.6.15",
     "query-string": "^9.5.1"
+  },
+  "resolutions": {
+    "minimatch": "11.0.1",
+    "glob": "14.0.2"
   },
   "devDependencies": {
     "@swc/core": "^1.16.22",
