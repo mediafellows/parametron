@@ -29,7 +29,7 @@ export function parse(
   options: ParseOptions = {},
 ): Record<string, string | number | boolean | (string | number | boolean)[]> {
   const params = new URLSearchParams(search);
-  const result: Record<string, any> = {};
+  const result: Record<string, any> = Object.create(null);
 
   params.forEach((value, key) => {
     const parsedValue = convertValue(value, options);
