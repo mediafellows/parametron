@@ -1,5 +1,5 @@
 import { IResult, IActionOpts } from "@mediafellows/chipmunk";
-import queryString from "query-string";
+import * as queryString from './queryString';
 
 export interface IParametronOpts {
   executor: (opts: IActionOpts) => Promise<IResult>;

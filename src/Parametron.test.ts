@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import queryString from "query-string";
+import * as queryString from './queryString';
 import { Parametron, createParametron } from "./Parametron";
 
 // ---------- helpers ----------
