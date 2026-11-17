@@ -152,7 +152,11 @@ function deepMerge(target: any, ...sources: any[]) {
         const base = isPlainObject(target[key]) ? target[key] : {};
         target[key] = deepMerge(base, value);
       } else if (Array.isArray(value)) {
-        target[key] = [...value];
+        const cloneValue = (item: any): any => {
+          if (Array.isArray(item)) return item.map(cloneValue);
+          return isPlainObject(item) ? deepMerge({}, item) : item;
+        };
+        target[key] = value.map(cloneValue);
       } else {
         target[key] = value;
       }
