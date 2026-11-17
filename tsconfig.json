@@ -5,14 +5,19 @@
     "skipLibCheck": true,
     "target": "es6",
     "noImplicitAny": false,
+    "lib": ["ES2017", "DOM"],
     "strictNullChecks": false,
     "experimentalDecorators": true,
+    "rootDir": "src",
     "outDir": "dist",
     "declaration": true,
     "esModuleInterop": true,
     "noUnusedLocals": true
   },
+  "include": ["src"],
   "exclude": [
+    "src/**/*.test.ts",
+    "coverage",
     "node_modules",
     "dist"
   ]
