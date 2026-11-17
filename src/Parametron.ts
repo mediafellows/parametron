@@ -144,6 +144,7 @@ function deepMerge(target: any, ...sources: any[]) {
     if (!source) continue;
 
     for (const key of Object.keys(source)) {
+      if (key === "__proto__") continue;
       const value = source[key];
       if (value === undefined) continue;
 
